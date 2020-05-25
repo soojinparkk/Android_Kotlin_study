@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:text="Hi"
         android:textColor="#000000"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,5 +23,17 @@
         android:textColor="@color/colorAccent"
         android:textSize="40dp">
     </TextView>
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#EABBBB"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:background="#A89982"
+        android:text="안녕하세요"/>
 
 </LinearLayout>
