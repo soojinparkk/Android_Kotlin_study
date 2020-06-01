@@ -1,0 +1,17 @@
+
+01. Activity
+- 앱의 한 화면
+
+- Life Cycle (수명 주기)
+1. onCreate()
+    -> activity가 생성될 때 단 한번만 호출
+    -> activity 생성시 한번만 하면 되는 작업들을 여기에서 해줌
+2. onStart()
+3. onResume()
+    -> 다시 앱으로 돌아올 때 무조건 호출
+    -> activity가 다시 호출될 때 해야 하는 작업들을 여기에서 해줌
+4. onPause()
+    -> 화면의 일부가 보이지 않을 때
+5. onStop()
+    -> 화면 전부가 보이지 않을 때
+6. onDestroy()
