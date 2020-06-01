@@ -8,4 +8,12 @@
 
 - 요청의 종류
     1. 전달만 하는 요청
+        -> startActivity()
     2. 리턴을 받는 요청
+        -> startActivityForResult()
+
+- Intent 종류
+    1. 명시적 Intent
+        -> 정확한 대상에게 요청
+    2. 암시적 Intent
+        -> 할 수 있는 대상에게 요청
