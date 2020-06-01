@@ -1,0 +1,11 @@
+
+03. Intent
+- 요청 관계
+- Intent 사용처
+    1. Activity - Activity
+    2. Android System - 내 App (전화)
+    3. 다른 App - 내 App -> 무작정 사용 불가, 상호합의가 있어야 함
+
+- 요청의 종류
+    1. 전달만 하는 요청
+    2. 리턴을 받는 요청
