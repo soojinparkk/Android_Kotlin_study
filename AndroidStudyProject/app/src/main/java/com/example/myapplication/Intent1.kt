@@ -23,16 +23,16 @@ class Intent1 : AppCompatActivity() {
 //            startActivity(intent)
 
             // 2. Apply
-//            val intent2 = Intent(this@Intent1, Intent2::class.java)
-//            intent2.apply {
-//                this.putExtra("num1", 1)
-//                this.putExtra("num2", 2)
-//            }
-//            startActivityForResult(intent2, 200)
+            val intent2 = Intent(this@Intent1, Intent2::class.java)
+            intent2.apply {
+                this.putExtra("num1", 1)
+                this.putExtra("num2", 2)
+            }
+            startActivityForResult(intent2, 200)
 
             // 암시적 Intent
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"))
-            startActivity(intent)
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"))
+//            startActivity(intent)
         }
     }
 
@@ -40,10 +40,10 @@ class Intent1 : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 200) {
-            Log.d("number", "" + requestCode)
-            Log.d("number", "" + resultCode)
+            Log.d("num", "" + requestCode)
+            Log.d("num", "" + resultCode)
             val result = data?.getIntExtra("result", 0)
-            Log.d("number", "" + result)
+            Log.d("num", "" + result)
         }
 
     }
