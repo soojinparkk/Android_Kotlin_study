@@ -1,0 +1,26 @@
+
+06. Fragment
+- Activity: 앱에 보이는 한 화면의 단위
+
+1. ex) 긴 화면 문제
+    - 액티비티가 길어지게 되면 (파트1,2,3,4,5,6,,,)
+        -> 관리 포인트가 많아짐 (관리 어려움)
+2. ex) 기기 다양 문제
+    - 안드로이드 디바이스가 너무 다양함
+    - 안드로이드에는 핸드폰만 있는 것이 아님 -> 테블릿 있음
+
+사용처
+- activity의 파트를 나누어서 책임짐
+
+Fragment
+- Life cycle 존재
+- activity에 종속적임 (activity 종료시 fragment 종료)
+
+사용방법
+1. xml에 ViewComponent로 추가
+2. 코드로(동적으로) 추가
+    -> 추가하고 싶을 때 추가하고 삭제하고 싶을 때 삭제 가능
+
+data 전달 방법
+1. activity -> fragment : argument와 bundle
+2. fragment -> activity : 자체 구현 (Listener 구현)
