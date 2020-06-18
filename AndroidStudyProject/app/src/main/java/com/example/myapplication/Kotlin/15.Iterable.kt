@@ -2,7 +2,7 @@ package com.example.myapplication.Kotlin
 
 fun main(args:Array<String>) {
 
-    val a = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val a = mutableListOf<Int>(2, 3, 4, 5, 6, 7, 8, 9, 0)
 
     // 반복하는 방법(1)
     for (item in a) {
