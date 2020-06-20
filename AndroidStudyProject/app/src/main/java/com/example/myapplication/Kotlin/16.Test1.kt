@@ -1,6 +1,6 @@
 package com.example.myapplication.Kotlin
 
-// 1번 문제
+// 1)
 // List 2개 생성
 // 첫번째 list는 0-9까지 값을 넣음 (반복문 사용)
 // 두번째 list는 첫번째 list 값을 하나씩 확인한 후
@@ -32,7 +32,7 @@ fun listFun() {
     }*/
 }
 
-// 2번 문제
+// 2)
 // 학점을 구하자
 // 90 - 100 -> A
 // 80 - 89 -> B
@@ -50,7 +50,7 @@ fun scoreFun(s:Int):String {
     }
 }
 
-// 3번 문제
+// 3)
 // 전달 받은 숫자의 각 자리 수의 합을 구하자
 // 조건: 전달 받은 숫자는 무조건 두자리 숫자
 
@@ -60,7 +60,7 @@ fun sumFun (num: Int): Int {
     return s + s2
 }
 
-// 4번 문제
+// 4)
 // 구구단 출력
 
 fun multiplicationTable() {
