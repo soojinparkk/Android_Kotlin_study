@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,17 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FragmentActivity">
+        <activity android:name=".AddviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PracticeUri">
+        <activity android:name=".Library">
+
         </activity>
+        <activity android:name=".Thread"></activity>
+        <activity android:name=".Context" />
+        <activity android:name=".Resource" />
+        <activity android:name=".NullSafety" />
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".PracticeUri" />
         <activity android:name=".Intent2" />
-        <activity android:name=".Intent1"></activity>
+        <activity android:name=".Intent1" />
         <activity android:name=".PracticeCalculator" />
         <activity android:name=".Listener" />
         <activity android:name=".MainActivity" />
