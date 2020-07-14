@@ -28,6 +28,7 @@ class AddviewActivity : AppCompatActivity() {
             carNameView.setText(carList.get(i).name)
             carEngineView.setText(carList.get(i).engine)
             container.addView(itemView)
+
         }
     }
 }
