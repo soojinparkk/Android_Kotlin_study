@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_fragment.*
 
-class FragmentActivity : AppCompatActivity(), FragmentOne.OnDataPassListener {
-
+class FragmentActivity : AppCompatActivity()
+    //, FragmentOne.OnDataPassListener
+{
+/*
     override fun onDataPass(s: String) {
         Log.d("pass", ""+s)
     }
-
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)

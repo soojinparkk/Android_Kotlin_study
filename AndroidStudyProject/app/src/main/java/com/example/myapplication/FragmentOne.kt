@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_one.*
 
 class FragmentOne : Fragment() {
-
+/*
     // fragment -> activity data 전달할 때
     interface OnDataPassListener {
         fun onDataPass(s: String)
@@ -92,4 +92,6 @@ class FragmentOne : Fragment() {
         Log.d("Life_cycle", "F onDetach")
         super.onDetach()
     }
+
+ */
 }
