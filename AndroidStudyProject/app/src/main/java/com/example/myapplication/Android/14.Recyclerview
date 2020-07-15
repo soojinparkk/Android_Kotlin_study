@@ -1,0 +1,10 @@
+
+RecyclerView
+장점
+- ListView의 개선판
+    -> ViewHolder 무조건 포함
+- 유연함
+    -> LayoutManager
+        - Linear
+        - Grid
+        - StaggeredGrid
