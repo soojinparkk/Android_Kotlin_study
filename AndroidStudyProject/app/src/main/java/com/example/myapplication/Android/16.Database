@@ -1,0 +1,27 @@
+
+Database
+- 데이터 저장소
+
+데이터 저장 방식
+1. RDB (Relational Database)    -> SQL
+    - 관계형 데이터 베이스
+    - 엑셀처럼 생김
+2. Key-Value    -> NoSQL
+    - 쌍으로 저장하는 방식
+
+-> RDBMS (Relational Database Management System)
+    - RDB를 관리하기 위한 툴
+    - MySQL, Oracle, PostgreSQL
+
+-> SQL: RDBMS를 다루기 위한 언어
+
+-> NoSQL
+    - SQL 말고 다르게 저장하는 방식
+    - 검색 속도가 굉장히 빠름 (검색 엔진 활용할 때 좋음)
+
+안드로이드 Database
+- SQLiteDatabase
+- SharedPreference
+    -> 목적: 공유된 사용자의 기호를 저장하기 위한 Database
+    -> Key-Value 방식
+    -> 하드하게 Database 시스템을 구축할 수 없음 (간단하게 사용)
