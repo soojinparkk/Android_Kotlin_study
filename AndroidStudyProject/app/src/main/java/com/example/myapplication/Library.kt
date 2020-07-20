@@ -12,7 +12,7 @@ class Library : AppCompatActivity() {
         setContentView(R.layout.activity_library)
 
         Glide.with(this@Library)
-            .load("http://movie.phinf.naver.net/20171107_251/1510033896133nWqxG_JPEG/movie_image.jpg")
+            .load("https://miro.medium.com/max/318/1*1OKmA2EdGln8O6RCVORgGg.png")
             .centerCrop()
             .into(glide)
     }
