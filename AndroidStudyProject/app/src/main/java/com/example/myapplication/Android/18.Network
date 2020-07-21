@@ -44,8 +44,12 @@ Request Type                    Status Code
 
 POST 보낼 때 타입은 서버가 정함
 
-Header: Body를 읽기 전 상위에 있는 정보
+Header: Body를 읽기 전 상위에 있는 정보 (인증 정보, 요약본)
 Body
 
 Status Code
 - 200번대는 보통 처리 성공
+
+Library
+- Volley: 구글 정식 developer web에 있음
+- Retrofit
