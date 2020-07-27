@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,34 +15,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RetrofitActivity">
+        <activity android:name=".PermissionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NetworkActivity">
+        <activity android:name=".RetrofitActivity">
 
         </activity>
-        <activity android:name=".AsyncActivity"></activity>
-        <activity android:name=".Realm"></activity>
+        <activity android:name=".NetworkActivity"></activity>
+        <activity android:name=".AsyncActivity" />
+        <activity android:name=".Realm" />
         <activity android:name=".SharedPreference" />
         <activity android:name=".TabPager2Activity" />
         <activity android:name=".TabPagerActivity" />
         <activity android:name=".PracticeRecyclerview" />
         <activity android:name=".RecyclerviewActivity" />
-        <activity android:name=".ListviewActivity"></activity>
+        <activity android:name=".ListviewActivity" />
         <activity android:name=".PracticeAddviewDetails" />
         <activity android:name=".PracticeAddview" />
         <activity android:name=".AddviewActivity" />
-        <activity android:name=".Library"></activity>
+        <activity android:name=".Library" />
         <activity android:name=".Thread" />
         <activity android:name=".Context" />
         <activity android:name=".Resource" />
         <activity android:name=".NullSafety" />
         <activity android:name=".FragmentActivity" />
-        <activity android:name=".PracticeUri"></activity>
+        <activity android:name=".PracticeUri" />
         <activity android:name=".Intent2" />
         <activity android:name=".Intent1" />
         <activity android:name=".PracticeCalculator" />
