@@ -14,6 +14,8 @@ class Intent2 : AppCompatActivity() {
         setContentView(R.layout.activity_intent2)
 
         result.setOnClickListener {
+
+            
             val num1 = intent.getIntExtra("num1", 0)
             val num2 = intent.getIntExtra("num2", 0)
 

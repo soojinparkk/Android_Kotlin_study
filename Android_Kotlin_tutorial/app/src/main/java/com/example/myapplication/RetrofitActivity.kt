@@ -21,7 +21,6 @@ class RetrofitActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-
         val service = retrofit.create(RetrofitService::class.java)
 
         // GET 요청
