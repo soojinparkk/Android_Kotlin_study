@@ -1,6 +1,5 @@
 package com.example.todolist
 
-import android.icu.text.UnicodeSetSpanner
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.realm.Realm
@@ -20,8 +19,8 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        var id = intent.getIntExtra("id", -1)
-        if (id == -1)
+        var id = intent.getLongExtra("id", -1L)
+        if (id == -1L)
             insertMode()
         else
             updateMode(id)
@@ -49,7 +48,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateMode(id: Int) {
+    private fun updateMode(id: Long) {
         // id에 해당하는 객체 화면에 표시
         val updateTodo = realm.where<Todo>().equalTo("id", id).findFirst()!!
         todoEditText.setText(updateTodo.title)
@@ -76,7 +75,7 @@ class EditActivity : AppCompatActivity() {
         realm.commitTransaction()   // 트랙잭션 종료 커밋
 
         // 다이얼로그 표시
-        alert ("ADD 완료"){
+        alert ("CREATE 완료"){
             yesButton { finish() }
         }.show()
     }
@@ -89,7 +88,7 @@ class EditActivity : AppCompatActivity() {
         return 0
     }
 
-    private fun updateTodo(id: Int) {
+    private fun updateTodo(id: Long) {
         realm.beginTransaction()
 
         val updateItem = realm.where<Todo>().equalTo("id", id).findFirst()!!    // 값 수정
@@ -104,7 +103,7 @@ class EditActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun deleteTodo(id: Int) {
+    private fun deleteTodo(id: Long) {
         realm.beginTransaction()
 
         val deleteItem = realm.where<Todo>().equalTo("id", id).findFirst()!!    // 삭제할 객체

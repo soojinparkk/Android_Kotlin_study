@@ -6,25 +6,47 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import io.realm.Realm
+import io.realm.Sort
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
+    val realm = Realm.getDefaultInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /*
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.addFab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }*/
 
+        val realmResult = realm.where<Todo>()
+            .findAll()  // 전체 할 일 정보를 가져와서
+            .sort("date", Sort.DESCENDING)  // 날짜순으로 내림차순 정렬
+
+        val adapter = TodoListAdapter(realmResult)
+        listView.adapter = adapter
+
+        // 데이터가 변경될 때마다 adapter에게 알려줌
+        realmResult.addChangeListener { _ -> adapter.notifyDataSetChanged() }
+
+        // 할 일 수정
+        listView.setOnItemClickListener { parent, view, position, id ->
+            startActivity<EditActivity>("id" to id)
+        }
+
+        // 새 할 일 추가
         addFab.setOnClickListener {
             startActivity<EditActivity>()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
