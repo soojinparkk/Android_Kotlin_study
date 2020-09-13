@@ -19,11 +19,51 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+
+        var id = intent.getIntExtra("id", -1)
+        if (id == -1)
+            insertMode()
+        else
+            updateMode(id)
+
+        // calendarView 날짜 선택했을 때 Calendar 객체에 설정
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        }
+
     }
 
     override fun onDestroy() {  // 액티비티가 소멸되는 생명주기
         super.onDestroy()
         realm.close()   // 사용이 끝난 인스턴스 해제
+    }
+
+    private fun insertMode() {
+        deleteFab.hide()    // 삭제 버튼 감추기
+
+        // 완료 버튼 클릭하면 data 추가
+        doneFab.setOnClickListener {
+            insertTodo()
+        }
+    }
+
+    private fun updateMode(id: Int) {
+        // id에 해당하는 객체 화면에 표시
+        val updateTodo = realm.where<Todo>().equalTo("id", id).findFirst()!!
+        todoEditText.setText(updateTodo.title)
+        calendarView.date = updateTodo.date
+
+        // 완료 버튼 클릭하면 data 수정 완료
+        doneFab.setOnClickListener {
+            updateTodo(id)
+        }
+
+        // 삭제 버튼 클릭하면 해당 객체 삭제
+        deleteFab.setOnClickListener {
+            deleteTodo(id)
+        }
     }
 
     private fun insertTodo() {
