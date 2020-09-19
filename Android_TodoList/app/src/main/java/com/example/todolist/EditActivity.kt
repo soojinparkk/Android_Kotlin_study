@@ -68,7 +68,9 @@ class EditActivity : AppCompatActivity() {
     private fun insertTodo() {
         realm.beginTransaction()    // 트랙잭션 시작
 
-        val newItem = realm.createObject<Todo>(nextId())    // 새 객체 생성
+        // Todo 타입의 Realm 객체 생성
+        // 이때 @PrimaryKey = nextId()
+        val newItem = realm.createObject<Todo>(nextId())
         newItem.title = todoEditText.text.toString()
         newItem.date = calendar.timeInMillis
 

@@ -8,3 +8,7 @@ open class Todo (
     var title: String = "",
     var date: Long = 0
 ): RealmObject()
+
+// Realm에서 사용하는 class에 open 키워드 추가
+// @PrimaryKey: Realm에서 제공하는 기본키 제약 주석
+// RealmObject 클래스 상속받아 Realm DB에서 다룸

@@ -1,0 +1,20 @@
+
+* Realm DB
+
+* 사용 순서
+
+1) 프로젝트 수준, 모듈 수준에 dependencies, plugin 추가
+2) Realm 모델 클래스 생성
+    - open class(@PrimaryKey ...): RealmObject()
+3) Realm 초기화
+    - Realm.init(this)
+    - Application 객체 상속하여 Realm 초기화
+    - 전체 activity에서 공통 사용하는 객체 초기화할 때
+        manifests name에 추가하여 사용
+4) Realm 인스턴스 객체 생성/해제
+    - Realm.detDefaultInstance()
+    - realm.close()
+5) Transaction
+    - realm.beginTransaction()
+    - realm.commitTransaction()
+    - DB에 추가, 삭제, 수정할 때 항상 트랜잭션을 시작하고 닫아야 함

@@ -1,8 +1,6 @@
 package com.example.todolist
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // 데이터가 변경될 때마다 adapter에게 알려줌
         realmResult.addChangeListener { _ -> adapter.notifyDataSetChanged() }
 
-        // 할 일 수정
+        // 할 일 수정 or 삭제
         listView.setOnItemClickListener { parent, view, position, id ->
             startActivity<EditActivity>("id" to id)
         }
@@ -49,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         realm.close()
     }
 
+    // toolbar 설정
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)

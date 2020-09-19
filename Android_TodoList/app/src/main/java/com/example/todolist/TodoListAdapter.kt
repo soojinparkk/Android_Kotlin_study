@@ -20,8 +20,8 @@ class TodoListAdapter (realmResult: OrderedRealmCollection<Todo>)
         // convertView는 아이템이 작성되기 전에는 null
         // 한 번 작성되면 이전에 작성했던 뷰 전달
         if (convertView == null) {
-            view = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.item_todo, parent, false)
+            view = LayoutInflater.from(parent?.context) // LayoutInflater: XML 레이아웃 파일을 코드로 불러오는 기능
+                .inflate(R.layout.item_todo, parent, false) // inflate(): XML 레이아웃 파일을 읽어서 뷰로 반환
 
             vh = TodoViewHolder(view)   // 뷰 홀더 객체 초기화
             view.tag = vh
@@ -30,6 +30,7 @@ class TodoListAdapter (realmResult: OrderedRealmCollection<Todo>)
             vh = view.tag as TodoViewHolder
         }
 
+        // RealmBaseAdapter는 adapterData 프로퍼티 제공
         if (adapterData != null) {  // 값이 있다면 해당 위치의 data 전달
             val item = adapterData!![position]
             vh.contentTextView.text = item.title

@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/solve_nickname"
+            android:id="@+id/solve_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="16dp"/>
 
     <Button
-        android:id="@+id/solve_finish"
+        android:id="@+id/solve_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SUBMIT"/>
