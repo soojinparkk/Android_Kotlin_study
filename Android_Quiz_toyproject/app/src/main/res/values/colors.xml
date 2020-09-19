@@ -6,4 +6,5 @@
 
     <color name="btnNo">#938C8C</color>
     <color name="btnYes">#D6225F</color>
+    <color name="background">#DDCCCC</color>
 </resources>
