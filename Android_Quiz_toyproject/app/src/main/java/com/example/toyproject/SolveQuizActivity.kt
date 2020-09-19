@@ -1,5 +1,6 @@
 package com.example.toyproject
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +17,10 @@ class SolveQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solve_quiz)
 
-        val nickname = "test9"
+        var myAnswerList = arrayListOf(-1, -1, -1, -1, -1)
+        val nickname: String = "test9"
+
+        solve_nick.setText(nickname).toString()
 
         (application as MasterApplication).service.getNicknameQuiz(nickname)
             .enqueue(object: Callback<QuizList> {
@@ -31,13 +35,20 @@ class SolveQuizActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val quizList = response.body()
 
-                        Log.d("soo", ""+response.body())
-
                         Toast.makeText(this@SolveQuizActivity, "Quiz 성공", Toast.LENGTH_LONG).show()
 
-                        val solveQuizAdapter = SolveQuizAdapter(quizList!!.quizList, LayoutInflater.from(this@SolveQuizActivity))
+                        val solveQuizAdapter = SolveQuizAdapter(quizList!!.quizList, LayoutInflater.from(this@SolveQuizActivity), myAnswerList)
                         solve_recyclerview.adapter = solveQuizAdapter
                         solve_recyclerview.layoutManager = LinearLayoutManager(this@SolveQuizActivity)
+
+                        solve_btn.setOnClickListener {
+                            if (-1 in myAnswerList) {
+                                // 풀지 않은 퀴즈가 있을 경우 toast
+                                Toast.makeText(this@SolveQuizActivity, "풀지 않은 문제가 있습니다", Toast.LENGTH_LONG).show()
+                            } else {    // 모든 퀴즈를 풀었을 경우 dialog
+
+                            }
+                        }
 
                     }
                 }
