@@ -1,10 +1,8 @@
 package com.example.toyproject
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -21,10 +19,11 @@ class SolveQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solve_quiz)
 
+        val nickname = intent.getStringExtra("nickname").toString()     // 현재 풀고있는 퀴즈 주인 닉네임
+
         lateinit var quizList: ArrayList<Quiz>      // 풀 퀴즈 리스트
         var quizAnswerList = arrayListOf<Int>()     // 퀴즈 주인 답 리스트
         var myAnswerList = arrayListOf(-1, -1, -1, -1, -1)  // 내가 푼 답 리스트
-        val nickname: String = "test9"          // 현재 풀고있는 퀴즈 주인 닉네임
 
         // 현재 풀고있는 퀴즈 주인 닉네임 설정
         solve_nick.setText(nickname).toString()
@@ -33,7 +32,7 @@ class SolveQuizActivity : AppCompatActivity() {
         (application as MasterApplication).service.getNicknameQuiz(nickname)
             .enqueue(object: Callback<QuizList> {
                 override fun onFailure(call: Call<QuizList>, t: Throwable) {
-                    Toast.makeText(this@SolveQuizActivity, "Quiz 실패", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SolveQuizActivity, "Quiz 실패", Toast.LENGTH_SHORT).show()
                     finish()
                 }
 
@@ -44,30 +43,67 @@ class SolveQuizActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val quizListList = response.body()
                         quizList = quizListList!!.quizList      // quizList 초기화
-                        Toast.makeText(this@SolveQuizActivity, "Quiz 성공", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SolveQuizActivity, "Quiz 2단계 성공", Toast.LENGTH_SHORT).show()
 
+                        // 퀴즈 풀기 화면 뷰 작성
                         val solveQuizAdapter = SolveQuizAdapter(quizList, LayoutInflater.from(this@SolveQuizActivity), myAnswerList)
                         solve_recyclerview.adapter = solveQuizAdapter
                         solve_recyclerview.layoutManager = LinearLayoutManager(this@SolveQuizActivity)
+
+                        // 제출 버튼을 클릭했을 경우
+                        solve_btn.setOnClickListener {
+                            if (-1 in myAnswerList) {   // 풀지 않은 퀴즈가 있을 경우 toast
+                                Toast.makeText(this@SolveQuizActivity, "풀지 않은 문제가 있습니다", Toast.LENGTH_SHORT).show()
+                            } else {    // 모든 퀴즈를 풀었을 경우 dialog
+                                for (i in 0 until 5) {
+                                    quizAnswerList.add(i, quizList[i].answer)   // 퀴즈 주인 답 리스트 초기화
+                                }
+                                val score = calcScore(quizAnswerList, myAnswerList)     // 퀴즈 score 계산
+
+                                // 서버에 해당 스코어 전송하고 결과 상태값 저장
+                                // val result = postScore("문제를 푼 사용자 닉네임 - answerer", score, nickname).toBoolean()
+
+                                val result = true
+                                if (result)
+                                    setDialog(score)    // 처음 푼 유저일 때 dialog 설정
+                            }
+                        }
 
                     }
                 }
             })
 
-        // 제출 버튼을 클릭했을 경우
-        solve_btn.setOnClickListener {
-            if (-1 in myAnswerList) {   // 풀지 않은 퀴즈가 있을 경우 toast
-                Toast.makeText(this@SolveQuizActivity, "풀지 않은 문제가 있습니다", Toast.LENGTH_LONG).show()
-            } else {    // 모든 퀴즈를 풀었을 경우 dialog
-                for (i in 0 until 5) {
-                    quizAnswerList.add(i, quizList[i].answer)   // 퀴즈 주인 답 리스트 초기화
+
+
+    }
+
+    // 서버에 해당 스코어를 전송하고 결과 상태값 리턴하는 함수
+    // answerer: 현재 로그인 되어있는 사용자 (퀴즈를 푼 사용자)
+    // nickname: 퀴즈의 주인
+    fun postScore(answerer: String, score: Int, nickname: String): String {
+        val params = HashMap<String, Any>()
+        params.put("answerer", "문제를 푼 사용자 닉네임 - answerer")
+        params.put("score", score)
+
+        var result: String = ""     // 퀴즈를 이미 푼 유저인지 확인하는 변수
+                                    // 이미 푼 유저라면 "false", 처음 푼 유저라면 "true" 리턴
+
+        (application as MasterApplication).service.postQuizScore(nickname, params)
+            .enqueue(object :Callback<HashMap<String, String>>{
+                override fun onResponse(
+                    call: Call<HashMap<String, String>>,
+                    response: Response<HashMap<String, String>>
+                ) {
+                    val params = response.body()
+                    result = params!!.get("success").toString()
                 }
 
-                val score = calcScore(quizAnswerList, myAnswerList)     // 퀴즈 score 계산
-                setDialog(score)    // dialog 설정
-            }
-        }
-
+                override fun onFailure(call: Call<HashMap<String, String>>, t: Throwable) {
+                    Toast.makeText(this@SolveQuizActivity, "해당 스코어 전송 실패", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            })
+        return result
     }
 
     // score 계산하는 함수
@@ -81,7 +117,7 @@ class SolveQuizActivity : AppCompatActivity() {
         return score
     }
 
-    // 퀴즈 모두 푼 후 사용되는 dialog
+    // 퀴즈 모두 푼 후 사용되는 dialog 설정하는 함수
     private fun setDialog(score: Int) {
         val builder = AlertDialog.Builder(this@SolveQuizActivity)
         val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
