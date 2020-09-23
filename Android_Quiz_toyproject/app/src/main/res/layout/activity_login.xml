@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background"
     android:padding="15dp"
+    android:background="@color/background"
     android:gravity="center"
-    tools:context=".SearchActivity">
+    tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/search_text"
+        android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="풀고 싶은 퀴즈 주인의 닉네임을 입력하세요"
+        android:text="  닉네임, 비밀번호를 입력하세요"
         android:textSize="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"
@@ -35,20 +35,35 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/search_editText"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:hint="Search Nickname"
-            android:background="@drawable/quiz_shape"
-            android:padding="20dp"/>
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/login_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nickname"
+                android:background="@drawable/quiz_shape"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/login_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:background="@drawable/quiz_shape"
+                android:padding="15dp"/>
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/search_enter_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="115dp"
             android:text="확인요"
             android:layout_marginLeft="5dp"
             android:background="@drawable/solve_btn_shape"/>
@@ -59,20 +74,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center|bottom">
 
-        <ImageView
-            android:id="@+id/search_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/search_btn_yes"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아직 회원이 아니신가요?"
+            android:textSize="18dp"/>
 
-        <ImageView
-            android:id="@+id/search_next_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/search_next_no"/>
+        <TextView
+            android:id="@+id/login_signup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 

@@ -17,7 +17,7 @@ class SearchActivity : AppCompatActivity() {
             // if ()    // 입력한 닉네임이 존재하지 않을 경우
 
             // 입력한 닉네임이 존재할 경우
-            Toast.makeText(this, "Quiz 1단계 성공", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "입력한 닉네임 존재", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, SolveQuizActivity::class.java)
                 .putExtra("nickname", nickname))    // 닉네임 전달
         }

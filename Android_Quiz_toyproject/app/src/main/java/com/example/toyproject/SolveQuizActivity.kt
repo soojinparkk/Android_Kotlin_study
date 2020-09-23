@@ -42,18 +42,18 @@ class SolveQuizActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val quizListList = response.body()
-                        quizList = quizListList!!.quizList      // quizList 초기화
-                        Toast.makeText(this@SolveQuizActivity, "Quiz 2단계 성공", Toast.LENGTH_SHORT).show()
+                        quizList = quizListList!!.quizList      // quizList 받아옴
+                        Toast.makeText(this@SolveQuizActivity, "Quiz 불러오기 성공", Toast.LENGTH_SHORT).show()
 
                         // 퀴즈 풀기 화면 뷰 작성
-                        val solveQuizAdapter = SolveQuizAdapter(quizList, LayoutInflater.from(this@SolveQuizActivity), myAnswerList)
+                        val solveQuizAdapter = QuizAdapter(quizList, LayoutInflater.from(this@SolveQuizActivity), myAnswerList)
                         solve_recyclerview.adapter = solveQuizAdapter
                         solve_recyclerview.layoutManager = LinearLayoutManager(this@SolveQuizActivity)
 
                         // 제출 버튼을 클릭했을 경우
                         solve_btn.setOnClickListener {
                             if (-1 in myAnswerList) {   // 풀지 않은 퀴즈가 있을 경우 toast
-                                Toast.makeText(this@SolveQuizActivity, "풀지 않은 문제가 있습니다", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SolveQuizActivity, "풀지 않은 문제가 있습니다", Toast.LENGTH_SHORT).show()
                             } else {    // 모든 퀴즈를 풀었을 경우 dialog
                                 for (i in 0 until 5) {
                                     quizAnswerList.add(i, quizList[i].answer)   // 퀴즈 주인 답 리스트 초기화

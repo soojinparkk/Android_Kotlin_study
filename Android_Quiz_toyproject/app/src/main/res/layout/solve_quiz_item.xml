@@ -9,7 +9,7 @@
     android:padding="12dp">
 
     <TextView
-        android:id="@+id/solve_content"
+        android:id="@+id/quiz_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
@@ -19,14 +19,14 @@
         android:layout_gravity="center"/>
 
     <ImageView
-        android:id="@+id/solve_yes"
+        android:id="@+id/quiz_yes"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/solve_o_no"
         android:layout_marginLeft="8dp" />
 
     <ImageView
-        android:id="@+id/solve_no"
+        android:id="@+id/quiz_no"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/solve_x_no"/>

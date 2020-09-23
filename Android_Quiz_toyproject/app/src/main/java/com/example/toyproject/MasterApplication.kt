@@ -42,7 +42,7 @@ class MasterApplication: Application() {
 
         // retrofit 생성
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-3-34-178-134.ap-northeast-2.compute.amazonaws.com:8080/toy2/")
+            .baseUrl("http://ec2-15-164-93-46.ap-northeast-2.compute.amazonaws.com:8080/toy2/")
             .addConverterFactory(GsonConverterFactory.create())
             // .client(client)
             .build()

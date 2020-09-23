@@ -4,10 +4,31 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitService {
-
     // @Headers("content-type: application/json")
+    @POST("login/")
+    fun login(
+        @Body params: HashMap<String, String>
+    ): Call<HashMap<String, String>>
+
+    @POST("users/signup")
+    fun register(
+        @Body user: HashMap<String, String>
+    ): Call<HashMap<String, String>>
+
+    @POST("users")
+    fun getNicknameIsExist(
+        @Body nickname : HashMap<String, String>
+    ): Call<HashMap<String, String>>
+
+
     @GET("quizzes/")
     fun getUserQuiz(): Call<QuizList>
+
+    @POST("quizzes/")
+    fun postUserQuiz(
+
+    )
+
 
     @GET("quizzes/{nickname}")
     fun getNicknameQuiz(

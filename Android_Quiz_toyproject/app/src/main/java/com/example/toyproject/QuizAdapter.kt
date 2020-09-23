@@ -7,15 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SolveQuizAdapter (
+class QuizAdapter (
     val quizList: ArrayList<Quiz>,
     val inflater: LayoutInflater,
     var myAnswerList: ArrayList<Int>
-): RecyclerView.Adapter<SolveQuizAdapter.SolveViewHolder>(){
+): RecyclerView.Adapter<QuizAdapter.QuizViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolveViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
         val view = inflater.inflate(R.layout.solve_quiz_item, parent, false)
-        return SolveViewHolder(view)
+        return QuizViewHolder(view)
     }
 
     // item 총 갯수 return
@@ -24,19 +24,19 @@ class SolveQuizAdapter (
     }
 
     // onCreateViewHolder에서 만든 view와 실제 입력되는 각각의 데이터 연결
-    override fun onBindViewHolder(holder: SolveViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
         holder.bind(quizList[position], position)
     }
 
-    inner class SolveViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class QuizViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val quizContent: TextView
         val yesBtn: ImageView
         val noBtn: ImageView
 
         init {
-            quizContent = itemView.findViewById(R.id.solve_content)
-            yesBtn = itemView.findViewById(R.id.solve_yes)
-            noBtn = itemView.findViewById(R.id.solve_no)
+            quizContent = itemView.findViewById(R.id.quiz_content)
+            yesBtn = itemView.findViewById(R.id.quiz_yes)
+            noBtn = itemView.findViewById(R.id.quiz_no)
         }
 
         fun bind (quiz: Quiz, index: Int) {
