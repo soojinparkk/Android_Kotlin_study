@@ -12,6 +12,8 @@ import retrofit2.Response
 
 class CreateQuizActivity : AppCompatActivity() {
 
+    val userNickname = intent.getStringExtra("userNickname").toString()     // 현재 로그인 상태인 유저 닉네임
+
     lateinit var quizList: ArrayList<Quiz>      // 생성할 퀴즈 리스트
     var myAnswerList = arrayListOf(-1, -1, -1, -1, -1)  // 내가 푼 답 리스트
 
@@ -27,7 +29,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<QuizList>, response: Response<QuizList>) {
                 if (response.isSuccessful) {
-                    val quizListList = response.body()
+                    var quizListList = response.body()
                     quizList = quizListList!!.quizList
                     Toast.makeText(this@CreateQuizActivity, "Quiz 불러오기 성공", Toast.LENGTH_SHORT).show()
 

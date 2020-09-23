@@ -59,7 +59,8 @@ class LoginActivity : AppCompatActivity() {
 
                                     // 로그인 후 첫 화면으로 전환
                                     Toast.makeText(this@LoginActivity, "환영합니다!" + "${user!!.get("nickname")}", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this@LoginActivity, SearchActivity::class.java))
+                                    startActivity(Intent(this@LoginActivity, SearchActivity::class.java)
+                                        .putExtra("userNickname",user!!.get("nickname")))
                                 }
 
 

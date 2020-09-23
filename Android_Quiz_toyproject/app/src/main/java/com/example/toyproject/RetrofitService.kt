@@ -26,8 +26,8 @@ interface RetrofitService {
 
     @POST("quizzes/")
     fun postUserQuiz(
-
-    )
+        @Body quizList: QuizList
+    ): Call<HashMap<String, String>>
 
 
     @GET("quizzes/{nickname}")

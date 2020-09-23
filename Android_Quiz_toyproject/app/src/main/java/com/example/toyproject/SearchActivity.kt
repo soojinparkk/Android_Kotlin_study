@@ -11,21 +11,28 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        val userNickname = intent.getStringExtra("userNickname").toString()
+
         search_enter_btn.setOnClickListener {
-            val nickname = search_editText.text.toString()  // 풀고 싶은 퀴즈 주인의 닉네임
+            val nickname = search_editText.text.toString()  // 퀴즈 주인 닉네임
 
             // if ()    // 입력한 닉네임이 존재하지 않을 경우
 
             // 입력한 닉네임이 존재할 경우
-            Toast.makeText(this, "입력한 닉네임 존재", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this, "입력한 닉네임 존재", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, SolveQuizActivity::class.java)
-                .putExtra("nickname", nickname))    // 닉네임 전달
+                .putExtra("nickname", nickname)             // 퀴즈 주인 닉네임 전달
+                .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
         }
 
+        // 내 정보 액티비티 클릭할 경우
+        // 1) 생성한 퀴즈가 없을 경우: CreateQuizActivity로 전환
+        // 2) 생성한 퀴즈가 있을 경우: RankActivity로 전환
         search_next_btn.setOnClickListener {
             search_btn.setImageResource(R.drawable.search_btn_no)
-            search_next_btn.setImageResource(R.drawable.search_nextbtn_yes)
-            startActivity(Intent(this, TestActivity::class.java))
+            search_next_btn.setImageResource(R.drawable.search_next_yes)
+            startActivity(Intent(this, CreateQuizActivity::class.java)
+                .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
         }
 
     }

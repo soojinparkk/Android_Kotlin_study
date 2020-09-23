@@ -20,6 +20,7 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var userPassword2View: EditText
     lateinit var registerBtn: Button
     lateinit var check: Button
+    var checkBtnClick = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,10 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         registerBtn.setOnClickListener {
-            register(this)
+            if(checkBtnClick==0){
+                Toast.makeText(this,"닉네임 중복확인을 해주세요",Toast.LENGTH_SHORT).show()
+            }else
+                register(this)
         }
     }
 
@@ -45,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // 회원가입하는 함수
-    fun register(activity: Activity) {
+    private fun register(activity: Activity) {
         val nickname = usernameView.text.toString()
         val password1 = userPassword1View.text.toString()
         val password2 = userPassword2View.text.toString()
@@ -79,7 +83,7 @@ class SignUpActivity : AppCompatActivity() {
                                     activity.startActivity(Intent(activity, LoginActivity::class.java))
 
                                 } else {
-                                    Toast.makeText(activity, "회원가입에 실패했습니다", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(activity, "회원가입에 실패했습니다", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
@@ -88,7 +92,7 @@ class SignUpActivity : AppCompatActivity() {
                     })
             }
         } else {    // 회원가입시 공백이 있을 경우
-            Toast.makeText(activity, "회원가입 정보를 입력해주세요", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "회원가입 정보를 입력해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -101,10 +105,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // 닉네임 중복확인하는 함수
-    fun nicknameCheck(activity: Activity) {
+    private fun nicknameCheck(activity: Activity) {
         val nickname = usernameView.text.toString()
         if (nickname == "") {
-            Toast.makeText(activity, "닉네임을 입력해주세요", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show()
         } else {
             val body = HashMap<String, String>()
             body.put("nickname", nickname)
@@ -127,6 +131,7 @@ class SignUpActivity : AppCompatActivity() {
                                 Toast.makeText(activity, "사용 불가능한 닉네임입니다", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(activity, "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show()
+                                checkBtnClick++
                             }
                         }
                     }
