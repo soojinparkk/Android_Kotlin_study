@@ -14,7 +14,7 @@ class QuizAdapter (
 ): RecyclerView.Adapter<QuizAdapter.QuizViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
-        val view = inflater.inflate(R.layout.solve_quiz_item, parent, false)
+        val view = inflater.inflate(R.layout.quiz_item, parent, false)
         return QuizViewHolder(view)
     }
 

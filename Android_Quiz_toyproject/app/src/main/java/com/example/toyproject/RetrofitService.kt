@@ -15,7 +15,7 @@ interface RetrofitService {
         @Body user: HashMap<String, String>
     ): Call<HashMap<String, String>>
 
-    @POST("users")
+    @POST("users/")
     fun getNicknameIsExist(
         @Body nickname : HashMap<String, String>
     ): Call<HashMap<String, String>>
@@ -38,7 +38,7 @@ interface RetrofitService {
     @POST("quizzes/{nickname}")
     fun postQuizScore(
         @Path("nickname") nickname: String,
-        @Body params: HashMap<String, Any>
+        @Body params: HashMap<String, String>
     ): Call<HashMap<String, String>>
 
 }

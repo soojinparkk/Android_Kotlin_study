@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         registerBtn.setOnClickListener {
-            if(checkBtnClick==0){
+            if(checkBtnClick == 0){
                 Toast.makeText(this,"닉네임 중복확인을 해주세요",Toast.LENGTH_SHORT).show()
             }else
                 register(this)
@@ -74,7 +74,7 @@ class SignUpActivity : AppCompatActivity() {
                         ) {
                             if (response.isSuccessful) {
                                 val result = response.body()
-                                if (result!!.get("signup")=="true") {
+                                if (result!!.get("signup") == "true") {
                                     Toast.makeText(activity, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show()
                                     val token = response.headers().get("X-AUTH-TOKEN").toString()
                                     saveUserToken(token, activity)  // Token 저장
@@ -127,7 +127,7 @@ class SignUpActivity : AppCompatActivity() {
                             val result = response.body()
 
                             // 닉네임 중복 확인
-                            if (result!!.get("success")=="false") {
+                            if (result!!.get("success") == "false") {
                                 Toast.makeText(activity, "사용 불가능한 닉네임입니다", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(activity, "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show()

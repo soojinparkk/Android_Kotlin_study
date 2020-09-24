@@ -48,9 +48,6 @@ class LoginActivity : AppCompatActivity() {
                                 val user = response.body()
                                 val token = response.headers().get("X-AUTH-TOKEN").toString()
 
-                                Log.d("soo", user.toString())
-
-
                                 if (token == "null") {
                                     Toast.makeText(this@LoginActivity, "아이디, 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show()
                                 } else{
@@ -58,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                                     (application as MasterApplication).createRetrofit()
 
                                     // 로그인 후 첫 화면으로 전환
-                                    Toast.makeText(this@LoginActivity, "환영합니다!" + "${user!!.get("nickname")}", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@LoginActivity, "${user!!.get("nickname")}" + "님 환영합니다!" , Toast.LENGTH_SHORT).show()
                                     startActivity(Intent(this@LoginActivity, SearchActivity::class.java)
                                         .putExtra("userNickname",user!!.get("nickname")))
                                 }

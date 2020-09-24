@@ -3,6 +3,7 @@ package com.example.toyproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_search.*
 
@@ -16,13 +17,15 @@ class SearchActivity : AppCompatActivity() {
         search_enter_btn.setOnClickListener {
             val nickname = search_editText.text.toString()  // 퀴즈 주인 닉네임
 
-            // if ()    // 입력한 닉네임이 존재하지 않을 경우
-
-            // 입력한 닉네임이 존재할 경우
-            // Toast.makeText(this, "입력한 닉네임 존재", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, SolveQuizActivity::class.java)
-                .putExtra("nickname", nickname)             // 퀴즈 주인 닉네임 전달
-                .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
+            // 입력한 닉네임이 존재하지 않을 경우 추가해야 함
+            if (nickname == "") {
+                Toast.makeText(this, "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else {
+                // 입력한 닉네임이 존재할 경우
+                startActivity(Intent(this, SolveQuizActivity::class.java)
+                    .putExtra("nickname", nickname)             // 퀴즈 주인 닉네임 전달
+                    .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
+            }
         }
 
         // 내 정보 액티비티 클릭할 경우

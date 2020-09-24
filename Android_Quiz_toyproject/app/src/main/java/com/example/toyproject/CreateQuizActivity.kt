@@ -2,6 +2,7 @@ package com.example.toyproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,14 +13,16 @@ import retrofit2.Response
 
 class CreateQuizActivity : AppCompatActivity() {
 
-    val userNickname = intent.getStringExtra("userNickname").toString()     // 현재 로그인 상태인 유저 닉네임
-
     lateinit var quizList: ArrayList<Quiz>      // 생성할 퀴즈 리스트
     var myAnswerList = arrayListOf(-1, -1, -1, -1, -1)  // 내가 푼 답 리스트
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
+
+        val userNickname = intent.getStringExtra("userNickname").toString()     // 현재 로그인 상태인 유저 닉네임
+
+        create_nick.setText(userNickname).toString()
 
         (application as MasterApplication).service.getUserQuiz().enqueue(object : Callback<QuizList>{
             override fun onFailure(call: Call<QuizList>, t: Throwable) {
@@ -44,6 +47,8 @@ class CreateQuizActivity : AppCompatActivity() {
                         } else {
                             for (i in 0 until 5) {
                                 quizList[i].answer = myAnswerList[i]
+
+
 
                             }
 

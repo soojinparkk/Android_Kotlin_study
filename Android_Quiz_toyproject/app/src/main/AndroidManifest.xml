@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".LoginActivity" >
+        <activity
+            android:name=".RankActivity"
+            android:label="@string/title_activity_rank"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateQuizActivity" />
-        <activity android:name=".SearchActivity">
-
-        </activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".SolveQuizActivity" />
         <activity android:name=".MainActivity" />

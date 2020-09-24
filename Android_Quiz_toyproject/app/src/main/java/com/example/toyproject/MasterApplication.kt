@@ -18,7 +18,7 @@ class MasterApplication: Application() {
     }
 
     fun createRetrofit() {
-        /*
+
         // header 설정 (header에 token이 있는 retrofit)
         // 원래 나가려던 통신을 original에 잡아둠
         // original에 header 추가 -> proceed
@@ -38,7 +38,7 @@ class MasterApplication: Application() {
                 it.proceed(original)
             }
         }
-        */
+
 
         // retrofit 생성
         val retrofit = Retrofit.Builder()
