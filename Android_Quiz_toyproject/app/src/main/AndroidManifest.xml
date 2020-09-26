@@ -14,9 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RankActivity"
-            android:label="@string/title_activity_rank"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".RankActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -27,9 +25,7 @@
         </activity>
         <activity android:name=".CreateQuizActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".TestActivity" />
         <activity android:name=".SolveQuizActivity" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

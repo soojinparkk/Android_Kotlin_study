@@ -49,7 +49,8 @@ class CreateQuizActivity : AppCompatActivity() {
                                 quizList[i].answer = myAnswerList[i]
                             }
 
-                            
+                            // nickname, quizList 담긴 객체 생성
+                            // 생성한 객체 서버로 post
 
                         }
                     }
