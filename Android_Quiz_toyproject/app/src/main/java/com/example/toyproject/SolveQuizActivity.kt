@@ -86,9 +86,9 @@ class SolveQuizActivity : AppCompatActivity() {
                                                 result = body!!.get("success").toString()
 
                                                 if (result == "true") {
-                                                    setDialog(score)    // 유저가 퀴즈를 처음 풀었을 때
+                                                    setDialog(score, nickname, userNickname)    // 유저가 퀴즈를 처음 풀었을 때
                                                 } else {
-                                                    setFailDialog()     // 유저가 이미 퀴즈를 풀었을 때
+                                                    setFailDialog(nickname, userNickname)     // 유저가 이미 퀴즈를 풀었을 때
                                                 }
                                             }
                                         }
@@ -119,7 +119,7 @@ class SolveQuizActivity : AppCompatActivity() {
     }
 
     // 유저가 퀴즈를 처음 풀었을 때 사용되는 dialog 설정하는 함수
-    private fun setDialog(score: String) {
+    private fun setDialog(score: String, nickname: String, userNickname: String) {
         val builder = AlertDialog.Builder(this@SolveQuizActivity)
         val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
@@ -130,20 +130,24 @@ class SolveQuizActivity : AppCompatActivity() {
 
         val okBtn = dialogView.findViewById<Button>(R.id.solve_dialog_btn)
         okBtn.setOnClickListener {
-            startActivity(Intent(this@SolveQuizActivity, RankActivity::class.java))
+            startActivity(Intent(this@SolveQuizActivity, RankActivity::class.java)
+                .putExtra("nickname", nickname)
+                .putExtra("userNickname", userNickname))
         }
 
     }
 
     // 유저가 이미 퀴즈를 풀었을 때 사용되는 dialog 설정하는 함수
-    fun setFailDialog() {
+    fun setFailDialog(nickname: String, userNickname: String) {
         val builder = AlertDialog.Builder(this@SolveQuizActivity)
         val dialogView = layoutInflater.inflate(R.layout.dialog_fail_view, null)
         builder.setView(dialogView).show()
 
         val okBtn = dialogView.findViewById<Button>(R.id.solve_dialog_fail_btn)
         okBtn.setOnClickListener {
-            startActivity(Intent(this@SolveQuizActivity, SearchActivity::class.java))
+            startActivity(Intent(this@SolveQuizActivity, RankActivity::class.java)
+                .putExtra("nickname", nickname)
+                .putExtra("userNickname", userNickname))
         }
     }
 

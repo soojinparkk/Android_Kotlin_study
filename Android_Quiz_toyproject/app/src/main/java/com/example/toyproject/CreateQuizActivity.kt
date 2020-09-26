@@ -34,7 +34,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     var quizListList = response.body()
                     quizList = quizListList!!.quizList
-                    Toast.makeText(this@CreateQuizActivity, "Quiz 불러오기 성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CreateQuizActivity, "퀴즈를 만들어주세요~", Toast.LENGTH_SHORT).show()
 
                     // 퀴즈 생성하기 화면 뷰 작성
                     val createQuizAdapter = QuizAdapter(quizList, LayoutInflater.from(this@CreateQuizActivity), myAnswerList)
@@ -47,10 +47,9 @@ class CreateQuizActivity : AppCompatActivity() {
                         } else {
                             for (i in 0 until 5) {
                                 quizList[i].answer = myAnswerList[i]
-
-
-
                             }
+
+                            
 
                         }
                     }

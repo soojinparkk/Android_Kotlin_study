@@ -1,5 +1,6 @@
 package com.example.toyproject
 
+import androidx.annotation.BoolRes
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -40,5 +41,10 @@ interface RetrofitService {
         @Path("nickname") nickname: String,
         @Body params: HashMap<String, String>
     ): Call<HashMap<String, String>>
+
+    @POST("users/rank/")
+    fun postRanking(
+        @Body params: HashMap<String, String>
+    ): Call<RankList>
 
 }

@@ -37,7 +37,8 @@ class LoginActivity : AppCompatActivity() {
                 (application as MasterApplication).service.login(body)
                     .enqueue(object : Callback<HashMap<String, String>> {
                         override fun onFailure(call: Call<HashMap<String, String>>, t: Throwable) {
-
+                            Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
 
                         override fun onResponse(
@@ -52,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.makeText(this@LoginActivity, "아이디, 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show()
                                 } else{
                                     saveUserToken(token, this@LoginActivity)
+
                                     (application as MasterApplication).createRetrofit()
 
                                     // 로그인 후 첫 화면으로 전환
@@ -59,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                                     startActivity(Intent(this@LoginActivity, SearchActivity::class.java)
                                         .putExtra("userNickname",user!!.get("nickname")))
                                 }
-
 
                             }
                         }
