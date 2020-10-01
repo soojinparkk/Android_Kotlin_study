@@ -3,8 +3,8 @@ package com.example.toyproject
 import java.io.Serializable
 
 data class QuizList (
-    val nickname: String = "",
-    val quizList: ArrayList<Quiz>
+    var nickname: String = "",
+    var quizList: ArrayList<Quiz>
 ): Serializable
 
 data class Quiz (

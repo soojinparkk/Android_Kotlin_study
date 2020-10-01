@@ -1,5 +1,6 @@
 package com.example.toyproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +27,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
         (application as MasterApplication).service.getUserQuiz().enqueue(object : Callback<QuizList>{
             override fun onFailure(call: Call<QuizList>, t: Throwable) {
-                Toast.makeText(this@CreateQuizActivity, "Quiz 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CreateQuizActivity, "퀴즈 불러오기 실패", Toast.LENGTH_SHORT).show()
                 finish()
             }
 
@@ -49,8 +50,37 @@ class CreateQuizActivity : AppCompatActivity() {
                                 quizList[i].answer = myAnswerList[i]
                             }
 
-                            // nickname, quizList 담긴 객체 생성
-                            // 생성한 객체 서버로 post
+                            // 퀴즈 생성 후 서버로 POST
+                            var postQuiz = QuizList(userNickname, quizList)
+                            (application as MasterApplication).service.postUserQuiz(postQuiz)
+                                .enqueue(object : Callback<HashMap<String, String>>{
+                                    override fun onFailure(
+                                        call: Call<HashMap<String, String>>,
+                                        t: Throwable
+                                    ) {
+                                        Toast.makeText(this@CreateQuizActivity, "퀴즈 생성 실패", Toast.LENGTH_SHORT).show()
+                                        finish()
+                                    }
+
+                                    override fun onResponse(
+                                        call: Call<HashMap<String, String>>,
+                                        response: Response<HashMap<String, String>>
+                                    ) {
+                                        if (response.isSuccessful) {
+                                            val body = response.body()
+                                            val result = body!!.get("success").toString()
+
+                                            if (result == "true") {
+                                                Log.d("soo", ""+result)
+                                                startActivity(Intent(this@CreateQuizActivity, RankActivity::class.java)
+                                                    .putExtra("userNickname", userNickname)
+                                                    .putExtra("nickname", userNickname))
+                                            } else {
+
+                                            }
+                                        }
+                                    }
+                                })
 
                         }
                     }

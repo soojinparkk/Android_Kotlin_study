@@ -35,8 +35,18 @@ class SearchActivity : AppCompatActivity() {
         search_next_btn.setOnClickListener {
             search_btn.setImageResource(R.drawable.search_btn_no)
             search_next_btn.setImageResource(R.drawable.search_next_yes)
-            startActivity(Intent(this, CreateQuizActivity::class.java)
-                .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
+/*
+            if () {
+
+                startActivity(Intent(this, CreateQuizActivity::class.java)
+                    .putExtra("userNickname", userNickname))    // 현재 로그인 상태인 유저 닉네임 전달
+            } else {
+                Log.d("soo", "check"+check)
+                startActivity(Intent(this, RankActivity::class.java)
+                    .putExtra("userNickname", userNickname)
+                    .putExtra("nickname", userNickname))
+            }
+*/
         }
 
     }
