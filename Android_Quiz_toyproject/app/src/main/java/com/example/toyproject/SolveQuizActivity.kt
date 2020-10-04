@@ -85,6 +85,8 @@ class SolveQuizActivity : AppCompatActivity() {
                                                 val body = response.body()
                                                 result = body!!.get("success").toString()
 
+                                                Log.d("soo", ""+result)
+
                                                 if (result == "true") {
                                                     setDialog(score, nickname, userNickname)    // 유저가 퀴즈를 처음 풀었을 때
                                                 } else {
