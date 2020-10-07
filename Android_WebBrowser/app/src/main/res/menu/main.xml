@@ -21,7 +21,7 @@
                 android:id="@+id/action_call"
                 android:title="CALL" />
             <item
-                android:id="@+id/action_texr"
+                android:id="@+id/action_text"
                 android:title="send MESSAGE" />
             <item
                 android:id="@+id/action_email"
