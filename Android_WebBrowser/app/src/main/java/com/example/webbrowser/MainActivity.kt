@@ -1,6 +1,7 @@
 package com.example.webbrowser
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
@@ -66,15 +67,35 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_call -> {
+                // Intent 클래스에 정의된 액션 중 하나인 ACTION_DIAL
+                // 전화 다이얼을 입력해주는 액션 설정
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:031-123-4567")
 
+                // 이 인텐트를 수행하는 액티비티가 있는지 검사
+                // null 리턴될 경우 수행하는 액티비티 X
+                //      -> 전화 앱이 없는 태블릿 같은 경우
+                if (intent.resolveActivity(packageManager) != null)
+                    startActivity(intent)
                 return true
             }
             R.id.action_text -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, "보낼 문자열")
+                    var chooser = Intent.createChooser(intent, null)
+                    if (intent.resolveActivity(packageManager) != null)
+                        startActivity(chooser)
+                }
 
+                // Anko 라이브러리를 사용할 경우
+                // sendSMS(전화번호, [문자열])
                 return true
             }
             R.id.action_email -> {
-
+                // Anko 라이브러리를 사용할 경우
+                // email(받는 메일 주소, [제목], [내용])
                 return true
             }
         }
@@ -94,11 +115,21 @@ class MainActivity : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_share -> {
-                // 페이지 공유
+                // Anko 라이브러리를 사용할 경우
+                // 문자열 공유
+                // share(문자열, [제목])
                 return true
             }
             R.id.action_browser -> {
-                // 기본 웹 브라우저에서 열기
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(webView.url)
+
+                if (intent.resolveActivity(packageManager) != null)
+                    startActivity(intent)
+
+                // Anko 라이브러리를 사용할 경우
+                // 웹 브라우저에서 열기
+                // browse(url)
                 return true
             }
         }
