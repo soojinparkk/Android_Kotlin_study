@@ -27,13 +27,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         event?.let {
             Log.d("sensor", "onSensorChanged x: " +
                     "${event.values[0]}, y: ${event.values[1]}, z: ${event.values[2]}")
+
+            tiltView.onSensorEvent(event)
         }
     }
 
     // 센서 정밀도가 변경되면 호출
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
     }
+
+    private lateinit var tiltView: TiltView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // 화면 꺼지지 않게 하기 (절전 기능 비활성화)
@@ -41,7 +44,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // 화면 가로 모드로 고정
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        tiltView = TiltView(this)
+        setContentView(tiltView)
     }
 
     // 액티비티가 동작할 때만 센서가 동작해야 베터리를 아낄 수 있음
