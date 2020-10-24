@@ -1,0 +1,27 @@
+
+* ViewPager2
+ViewPager -> ViewPager2 로 이전 (2019.02.07 릴리즈)
+
+- 세로 방향 지원 (수직 스크롤링)
+    기존 가로 페이징은 물론 세로 페이징도 지원
+    android:orientation 속성으로 설정 가능 -> vertical
+    setOrientation() 메서드 사용하여 속성 설정 가능
+
+- 오른쪽에서 왼쪽 페이징 지원 (RTL 레이아웃)
+    android:layoutDirection 속성으로 설정 가능 -> rtl
+    setLayoutDirection() 메서드 사용하여 속성 설정 가능
+
+- 수정 가능한 프래그먼트 컬렉션
+    기본 컬렉션이 변경되면 notifyDatasetChanged() 호출하여 UI 업데이트
+    -> 앱은 런타임 시 프래그먼트 컬렉션 동적으로 수정,
+        ViewPager2는 수정된 컬렉션 올바르게 표시
+
+- RecyclerView 기반으로 빌드 가능
+    DiffUtil 유틸리티 클래스에 액세스 가능
+
+
+* 변경 사항
+- 뷰를 통해 페이징 하는 경우
+    RecyclerView.Adapter
+- 프래그먼트를 통해 페이징 하는 경우
+    FragmentStateAdapter
