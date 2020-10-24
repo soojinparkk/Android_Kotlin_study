@@ -1,5 +1,7 @@
 package com.example.mygallery
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,14 +14,14 @@ private const val ARG_URI = "uri"   // 컴파일 시간에 결정되는 상수
 
 class PhotoFragment : Fragment() {
 
-    private var uri: String? = null
+    private lateinit var uri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // ARG_URI 키에 저장된 uri 값을 얻어서 변수에 저장
-        arguments?.let {
-            uri = it.getString(ARG_URI)
+        arguments?.getParcelable<Uri>(ARG_URI)?.let {
+            uri = it
         }
     }
 
@@ -34,15 +36,24 @@ class PhotoFragment : Fragment() {
     // 뷰가 생성된 직후에 호출
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(this).load(uri).into(imageView)
+        // Glide.with(this).load(uri).into(imageView)
+
+        // use 함수는 자동으로 close 해 줌
+        // "r" read 모드로 파일 정보 얻음
+        val descriptor = requireContext().contentResolver.openFileDescriptor(uri, "r")
+        descriptor?.use {
+            val bitmap = BitmapFactory.decodeFileDescriptor(descriptor.fileDescriptor)
+            Glide.with(this).load(bitmap).into(imageView)
+        }
     }
 
+    // fragment 생성
     companion object {
         @JvmStatic
-        fun newInstance(uri: String) =
+        fun newInstance(uri: Uri) =
             PhotoFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_URI, uri)
+                    putParcelable(ARG_URI, uri)
                 }
             }
     }
