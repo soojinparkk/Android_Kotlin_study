@@ -16,6 +16,7 @@ import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 import java.util.ArrayList
+import kotlin.concurrent.timer
 
 private const val REQUEST_READ_EXTERNAL_STORAGE = 1000    // 권한 요청에 대한 결과를 분기 처리하는 데 사용
 
@@ -126,5 +127,17 @@ class MainActivity : AppCompatActivity() {
         val adapter = MyPagerAdapter(supportFragmentManager)
         adapter.updateFragments(fragments)
         viewPager.adapter = adapter
+
+        // 3초마다 자동 슬라이드
+        timer(period = 3000) {
+            runOnUiThread {
+                if (viewPager.currentItem < adapter.itemCount - 1) {    // 현재 페이지가 마지막 페이지가 아닐경우
+                    viewPager.currentItem = viewPager.currentItem + 1
+                } else {    // 현재 페이지가 마지막 페이지일 경우
+                    viewPager.currentItem = 0
+                }
+            }
+        }
+
     }
 }
