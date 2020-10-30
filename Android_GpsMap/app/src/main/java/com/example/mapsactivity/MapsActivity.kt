@@ -1,7 +1,13 @@
 package com.example.mapsactivity
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -13,6 +19,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -21,6 +31,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
+
+    private val REQUEST_ACCESS_FINE_LOACTION = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +83,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 // 14 level로 확대하고 현재 위치로 카메라 이동
                 val latLng = LatLng(latitude, longitude)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
+
+                Log.d("Maps", "위도: $latitude, 경도: $longitude")
             }
         }
     }
@@ -78,11 +92,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
 
-        addLocationListener()
+        // 권한 요청
+        permissionCheck(cancel = {
+            // 위치 정보가 필요한 이유 다이얼로그로 표시
+            showPermissionInfoDialog()
+        }, ok = {
+            // 현재 위치를 주기적으로 요청 (권한이 필요한 부분)
+            addLocationListener()
+        })
     }
 
+    // 권한 요청 코드를 작성했지만 별도의 메서드로 해당 코드 블록을 분리할 경우
+    // 안드로이드에서 에러로 판단
+    // (권한이 필요한 코드의 주변에 직접 작성한 권한 요청 코드만 인식)
+    // -> 권한 요청을 무시하는 주석 추가함
+    @SuppressLint("MissingPermission")
     private fun addLocationListener() {
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // 위치 요청 취소
+        removeLocationListener()
+    }
+
+    private fun removeLocationListener() {
+        // 현재 위치 요청 삭제
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
     /**
@@ -101,5 +139,60 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+
+    private fun permissionCheck(cancel: () -> Unit, ok: () -> Unit) {
+        // 위치 권한이 있는지 검사
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // 위치 권한이 없을 경우
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // 이전에 위치 권한을 한 번 거부한 적이 있는 경우에 실행할 함수
+                cancel()
+            } else {
+                // 권한 요청
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_ACCESS_FINE_LOACTION)
+            }
+        } else {
+            // 위치 권한이 있을 경우
+            ok()
+        }
+    }
+
+    private fun showPermissionInfoDialog() {
+        alert ("현재 위치 정보를 얻으려면 위치 권한이 필요합니다", "권한이 필요한 이유"){
+            yesButton {
+                // 권한 요청
+                ActivityCompat.requestPermissions(this@MapsActivity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_ACCESS_FINE_LOACTION)
+            }
+            noButton {  }
+        }.show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_ACCESS_FINE_LOACTION -> {
+                if (grantResults.isNotEmpty()
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 권한 허용
+                    addLocationListener()
+                } else {
+                    // 권한 거부
+                    toast("권한 거부 됨")
+                }
+                return
+            }
+        }
     }
 }
