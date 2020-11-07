@@ -3,6 +3,7 @@ package com.example.flashlight
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.intentFor
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,11 +16,11 @@ class MainActivity : AppCompatActivity() {
         // isChecked: on/off 상태를 Boolean 값으로 알려줌
         flashSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                torch.flashOn()
+                startService(intentFor<TorchService>().setAction("on"))
             } else {
-                torch.flashOff()
+                startService(intentFor<TorchService>().setAction("off"))
             }
         }
-        
+
     }
 }
