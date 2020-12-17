@@ -2,7 +2,7 @@
      
 > 공부하는 대로 계속 업데이트 예정입니다🙌
 
-## ✔ Android_kotlin_tutorial
+## ✔ Android_Kotlin_tutorial
 - 코틀린 기본 문법 및 실행 예제
 - 자주 사용하는 안드로이드 주요 기능 실행 예제
   - Intent
@@ -13,12 +13,16 @@
   - TabLayout & Pager
   - Permission
   - Database
-    1. SharedPerference
-    2. Realm
+    - SharedPerference
+    - Realm
   - Thread
   - Async
   - Uri
   - Network - Retrofit
+
+## ✔ Android_tutorial_ver2.0
+- `Android_Kotlin_tutorial`에서 다루지 못한 주요 기능 실행 예제
+     - Database - SQLite
 
 ## ✔ Android_Quiz_toyproject
 - SK LOOKIE 2020 toyproject
