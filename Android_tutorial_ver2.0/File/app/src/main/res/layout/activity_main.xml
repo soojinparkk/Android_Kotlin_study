@@ -26,4 +26,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="내부 저장소 read" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="외부 저장소 WRITE" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="외부 저장소 READ" />
 </LinearLayout>
