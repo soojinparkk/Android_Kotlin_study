@@ -84,9 +84,9 @@ class MainActivity : AppCompatActivity() {
             // -> ?에 10을 넣으면 a라는 column의 값이 10인 레코드 가져옴
             // -> (null == 조건절이 없을 경우)
             // 네 번째 인자: 위의 조건절의 ?에 설정될 값의 문자열 배열
-            // 다섯 번째 인자: 정렬 기준
-            // 여섯 번째 인자: group by
-            // 일곱 번째 인자: having
+            // 다섯 번째 인자: group by
+            // 여섯 번째 인자: having
+            // 일곱 번째 인자: 정렬 기준
             var c = db.query("TestTable", null, null, null, null, null, null)
 
             textView.text = ""
