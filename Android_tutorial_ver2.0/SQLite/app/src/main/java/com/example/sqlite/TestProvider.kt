@@ -8,7 +8,7 @@ import android.net.Uri
 class TestProvider : ContentProvider() {
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        TODO("Implement this to handle requests to delete one or more rows")
+        // TODO("Implement this to handle requests to delete one or more rows")
         val helper = DBHelper(context!!)
         var db = helper.writableDatabase
 
@@ -17,14 +17,15 @@ class TestProvider : ContentProvider() {
     }
 
     override fun getType(uri: Uri): String? {
-        TODO(
-            "Implement this to handle requests for the MIME type of the data" +
-                    "at the given URI"
-        )
+        // TODO(
+        //    "Implement this to handle requests for the MIME type of the data" +
+        //            "at the given URI"
+        // )
+        return null
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        TODO("Implement this to handle requests to insert a new row.")
+        // TODO("Implement this to handle requests to insert a new row.")
         val helper = DBHelper(context!!)
         var db = helper.writableDatabase
 
@@ -34,14 +35,15 @@ class TestProvider : ContentProvider() {
     }
 
     override fun onCreate(): Boolean {
-        TODO("Implement this to initialize your content provider on startup.")
+        // TODO("Implement this to initialize your content provider on startup.")
+        return false
     }
 
     override fun query(
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
-        TODO("Implement this to handle query requests from clients.")
+        // TODO("Implement this to handle query requests from clients.")
         val helper = DBHelper(context!!)
         var db = helper.writableDatabase
 
@@ -52,7 +54,7 @@ class TestProvider : ContentProvider() {
         uri: Uri, values: ContentValues?, selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-        TODO("Implement this to handle requests to update one or more rows.")
+        // TODO("Implement this to handle requests to update one or more rows.")
         val helper = DBHelper(context!!)
         var db = helper.writableDatabase
 
