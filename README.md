@@ -23,6 +23,7 @@
 ## ✔ Android_tutorial_ver2.0
 - `Android_Kotlin_tutorial`에서 다루지 못한 주요 기능 실행 예제
      - Database - SQLite
+     - Content Provider
 
 ## ✔ Android_Quiz_toyproject
 - SK LOOKIE 2020 toyproject
